@@ -3,7 +3,7 @@ import { Field, Int, ObjectType } from 'type-graphql';
 
 @ObjectType()
 @Entity()
-export class Post {
+export class User {
   @Field(() => Int)
   @PrimaryKey()
   id!: number;
@@ -17,6 +17,11 @@ export class Post {
   updated_at = new Date();
 
   @Field()
+  @Property({ type: 'text', unique: true })
+  username!: string;
+
+  // removed the @Field decorator so the password
+  // is not exposed to graphql query
   @Property({ type: 'text' })
-  title!: string;
+  password!: string;
 }
